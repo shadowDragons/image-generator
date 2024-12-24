@@ -16,7 +16,9 @@ interface CanvasProps {
 export const Canvas = forwardRef<HTMLDivElement, CanvasProps>(({ state, onElementSelect, onElementUpdate, onElementDuplicate, onElementDelete }, ref) => {
   const [scale, setScale] = useState(1)
   const containerRef = useRef<HTMLDivElement>(null)
+  const canvasRef = useRef<HTMLDivElement>(null)
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
+  const [actualCanvasSize, setActualCanvasSize] = useState({ width: 0, height: 0 })
   const [, drop] = useDrop(
     () => ({
       accept: 'canvasElement',
@@ -60,6 +62,22 @@ export const Canvas = forwardRef<HTMLDivElement, CanvasProps>(({ state, onElemen
     return () => window.removeEventListener('resize', updateDimensions)
   }, [state.canvasSize.aspectRatio])
 
+  useEffect(() => {
+    const updateCanvasSize = () => {
+      if (canvasRef.current) {
+        const rect = canvasRef.current.getBoundingClientRect()
+        setActualCanvasSize({
+          width: rect.width,
+          height: rect.height,
+        })
+      }
+    }
+
+    updateCanvasSize()
+    window.addEventListener('resize', updateCanvasSize)
+    return () => window.removeEventListener('resize', updateCanvasSize)
+  }, [scale, dimensions])
+
   return (
     <div ref={containerRef} className='bg-gray-800 p-4 md:p-8 rounded-lg overflow-auto h-[80vh] w-[800px]'>
       <div
@@ -73,6 +91,7 @@ export const Canvas = forwardRef<HTMLDivElement, CanvasProps>(({ state, onElemen
         <div
           ref={node => {
             drop(node)
+            canvasRef.current = node
             if (typeof ref === 'function') ref(node)
             else if (ref) ref.current = node
           }}
@@ -102,8 +121,8 @@ export const Canvas = forwardRef<HTMLDivElement, CanvasProps>(({ state, onElemen
               onDuplicate={newElement => onElementDuplicate(newElement)}
               onDelete={() => onElementDelete(element.id)}
               scale={scale}
-              canvasWidth={state.canvasSize.width}
-              canvasHeight={state.canvasSize.width / state.canvasSize.aspectRatio}
+              canvasWidth={actualCanvasSize.width}
+              canvasHeight={actualCanvasSize.height}
             />
           ))}
         </div>

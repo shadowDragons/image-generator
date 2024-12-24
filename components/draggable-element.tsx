@@ -154,6 +154,7 @@ export function DraggableElement({ element, onSelect, onUpdate, onDuplicate, onD
             element={element}
             canvasWidth={canvasWidth}
             canvasHeight={canvasHeight}
+            scale={scale}
             onUpdate={onUpdate}
             onDuplicate={handleDuplicate}
             onDelete={handleDelete}
@@ -182,6 +183,7 @@ export function DraggableElement({ element, onSelect, onUpdate, onDuplicate, onD
             element={element}
             canvasWidth={canvasWidth}
             canvasHeight={canvasHeight}
+            scale={scale}
             onUpdate={onUpdate}
             onDuplicate={handleDuplicate}
             onDelete={handleDelete}
@@ -201,6 +203,7 @@ export function DraggableElement({ element, onSelect, onUpdate, onDuplicate, onD
             element={element}
             canvasWidth={canvasWidth}
             canvasHeight={canvasHeight}
+            scale={scale}
             onUpdate={onUpdate}
             onDuplicate={handleDuplicate}
             onDelete={handleDelete}
@@ -227,6 +230,7 @@ export function DraggableElement({ element, onSelect, onUpdate, onDuplicate, onD
             element={element}
             canvasWidth={canvasWidth}
             canvasHeight={canvasHeight}
+            scale={scale}
             onUpdate={onUpdate}
             onDuplicate={handleDuplicate}
             onDelete={handleDelete}
@@ -245,6 +249,7 @@ export function DraggableElement({ element, onSelect, onUpdate, onDuplicate, onD
             element={element}
             canvasWidth={canvasWidth}
             canvasHeight={canvasHeight}
+            scale={scale}
             onUpdate={onUpdate}
             onDuplicate={handleDuplicate}
             onDelete={handleDelete}

@@ -1,124 +1,80 @@
 import { Button } from '@/components/ui/button'
-import {
-  AlignHorizontalJustifyCenterIcon,
-  AlignHorizontalJustifyEndIcon,
-  AlignHorizontalJustifyStartIcon,
-  AlignVerticalJustifyCenterIcon,
-  AlignVerticalJustifyEndIcon,
-  AlignVerticalJustifyStartIcon,
-  CopyIcon,
-  Trash2Icon,
-} from 'lucide-react'
-import type { CanvasElement, ElementAlignment, VerticalAlignment } from '../types/editor'
+import { AlignCenterHorizontalIcon, AlignEndHorizontalIcon, AlignStartHorizontalIcon, CopyIcon, Trash2Icon } from 'lucide-react'
+import { useEffect, useRef } from 'react'
+import type { CanvasElement } from '../types/editor'
 
 interface QuickActionsProps {
   element: CanvasElement
   canvasWidth: number
   canvasHeight: number
+  scale: number
   onUpdate: (updates: Partial<CanvasElement>) => void
   onDuplicate: () => void
   onDelete: () => void
 }
 
-export function QuickActions({ element, canvasWidth, canvasHeight, onUpdate, onDuplicate, onDelete }: QuickActionsProps) {
-  const updateAlignment = (alignment: ElementAlignment) => {
-    let x = element.x
+export function QuickActions({ element, canvasWidth, canvasHeight, scale, onUpdate, onDuplicate, onDelete }: QuickActionsProps) {
+  const lastAlignment = useRef<'left' | 'center' | 'right' | null>(null)
 
-    if (alignment === 'left') {
-      x = 20
-    } else if (alignment === 'center') {
-      let elementWidth = 0
-      if ('width' in element) {
-        elementWidth = element.width
-      } else if (element.type === 'text') {
-        // Approximate text width based on content length and font size
-        elementWidth = element.content.length * (element.fontSize * 0.6)
-      } else if (element.type === 'icon') {
-        elementWidth = element.size
-      }
-      x = (canvasWidth - elementWidth) / 2
-    } else if (alignment === 'right') {
-      let elementWidth = 0
-      if ('width' in element) {
-        elementWidth = element.width
-      } else if (element.type === 'text') {
-        elementWidth = element.content.length * (element.fontSize * 0.6)
-      } else if (element.type === 'icon') {
-        elementWidth = element.size
-      }
-      x = canvasWidth - elementWidth - 20
+  const getElementWidth = () => {
+    let elementWidth = 0
+    if (element.type === 'text') {
+      const tempDiv = document.createElement('div')
+      tempDiv.style.position = 'absolute'
+      tempDiv.style.visibility = 'hidden'
+      tempDiv.style.fontSize = `${element.fontSize}px`
+      tempDiv.style.fontFamily = element.fontFamily
+      tempDiv.innerText = element.content
+      document.body.appendChild(tempDiv)
+      elementWidth = tempDiv.offsetWidth
+      document.body.removeChild(tempDiv)
+    } else if (element.type === 'image' || element.type === 'code' || element.type === 'shape') {
+      elementWidth = element.width
+    } else if (element.type === 'icon') {
+      elementWidth = element.size
     }
-
-    onUpdate({ alignment, x })
+    return elementWidth
   }
 
-  const updateVerticalAlignment = (verticalAlignment: VerticalAlignment) => {
-    let y = element.y
+  const handleAlign = (position: 'left' | 'center' | 'right') => {
+    lastAlignment.current = position
+    const elementWidth = getElementWidth()
+    const actualCanvasWidth = canvasWidth / scale
+    let newX = element.x
 
-    if (verticalAlignment === 'top') {
-      y = 20
-    } else if (verticalAlignment === 'middle') {
-      let elementHeight = 0
-      if ('height' in element) {
-        elementHeight = element.height
-      } else if (element.type === 'text') {
-        elementHeight = element.fontSize
-      } else if (element.type === 'icon') {
-        elementHeight = element.size
-      }
-      y = (canvasHeight - elementHeight) / 2
-    } else if (verticalAlignment === 'bottom') {
-      let elementHeight = 0
-      if ('height' in element) {
-        elementHeight = element.height
-      } else if (element.type === 'text') {
-        elementHeight = element.fontSize
-      } else if (element.type === 'icon') {
-        elementHeight = element.size
-      }
-      y = canvasHeight - elementHeight - 20
+    switch (position) {
+      case 'left':
+        newX = 0
+        break
+      case 'center':
+        newX = (actualCanvasWidth - elementWidth) / 2
+        break
+      case 'right':
+        newX = actualCanvasWidth - elementWidth
+        break
     }
 
-    onUpdate({ verticalAlignment, y })
+    onUpdate({ x: newX })
   }
+
+  // 监听画布尺寸变化，如果元素之前是居中或右对齐，则重新计算位置
+  useEffect(() => {
+    if (lastAlignment.current === 'center' || lastAlignment.current === 'right') {
+      handleAlign(lastAlignment.current)
+    }
+  }, [canvasWidth, scale])
 
   return (
-    <div className='absolute -top-12 left-0 bg-gray-800 rounded-md shadow-lg flex items-center gap-1 p-1'>
-      <div className='flex items-center gap-1 border-r border-gray-700 pr-1'>
-        <Button size='icon' variant={element.alignment === 'left' ? 'default' : 'ghost'} className='h-8 w-8' onClick={() => updateAlignment('left')}>
-          <AlignHorizontalJustifyStartIcon className='h-4 w-4' />
+    <div className='absolute -top-10 left-0 flex items-center gap-1 rounded-md bg-background/80 backdrop-blur p-1 shadow-sm border'>
+      <div className='flex items-center gap-1 border-r pr-1'>
+        <Button size='icon' variant={lastAlignment.current === 'left' ? 'default' : 'ghost'} className='h-8 w-8' onClick={() => handleAlign('left')}>
+          <AlignStartHorizontalIcon className='h-4 w-4' />
         </Button>
-        <Button size='icon' variant={element.alignment === 'center' ? 'default' : 'ghost'} className='h-8 w-8' onClick={() => updateAlignment('center')}>
-          <AlignHorizontalJustifyCenterIcon className='h-4 w-4' />
+        <Button size='icon' variant={lastAlignment.current === 'center' ? 'default' : 'ghost'} className='h-8 w-8' onClick={() => handleAlign('center')}>
+          <AlignCenterHorizontalIcon className='h-4 w-4' />
         </Button>
-        <Button size='icon' variant={element.alignment === 'right' ? 'default' : 'ghost'} className='h-8 w-8' onClick={() => updateAlignment('right')}>
-          <AlignHorizontalJustifyEndIcon className='h-4 w-4' />
-        </Button>
-      </div>
-      <div className='flex items-center gap-1 border-r border-gray-700 pr-1'>
-        <Button
-          size='icon'
-          variant={element.verticalAlignment === 'top' ? 'default' : 'ghost'}
-          className='h-8 w-8'
-          onClick={() => updateVerticalAlignment('top')}
-        >
-          <AlignVerticalJustifyStartIcon className='h-4 w-4' />
-        </Button>
-        <Button
-          size='icon'
-          variant={element.verticalAlignment === 'middle' ? 'default' : 'ghost'}
-          className='h-8 w-8'
-          onClick={() => updateVerticalAlignment('middle')}
-        >
-          <AlignVerticalJustifyCenterIcon className='h-4 w-4' />
-        </Button>
-        <Button
-          size='icon'
-          variant={element.verticalAlignment === 'bottom' ? 'default' : 'ghost'}
-          className='h-8 w-8'
-          onClick={() => updateVerticalAlignment('bottom')}
-        >
-          <AlignVerticalJustifyEndIcon className='h-4 w-4' />
+        <Button size='icon' variant={lastAlignment.current === 'right' ? 'default' : 'ghost'} className='h-8 w-8' onClick={() => handleAlign('right')}>
+          <AlignEndHorizontalIcon className='h-4 w-4' />
         </Button>
       </div>
       <div className='flex items-center gap-1'>
