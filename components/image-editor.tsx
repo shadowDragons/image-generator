@@ -7,7 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import html2canvas from 'html2canvas'
 import * as Icons from 'lucide-react'
 import { nanoid } from 'nanoid'
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 import { TouchBackend } from 'react-dnd-touch-backend'
@@ -18,15 +18,6 @@ import { ElementProperties } from './element-properties'
 import { GradientTemplates } from './gradient-templates'
 import { IconPresets } from './icon-presets'
 import { TemplatePresets } from './template-presets'
-
-const isTouchDevice = () => {
-  return (
-    'ontouchstart' in window ||
-    navigator.maxTouchPoints > 0 ||
-    // @ts-ignore
-    navigator.msMaxTouchPoints > 0
-  )
-}
 
 export function ImageEditor() {
   const [editorState, setEditorState] = useState<EditorState>({
@@ -42,6 +33,16 @@ export function ImageEditor() {
   })
   const [selectedElement, setSelectedElement] = useState<string | null>(null)
   const canvasRef = useRef<HTMLDivElement>(null)
+  const [isTouch, setIsTouch] = useState(false)
+
+  useEffect(() => {
+    setIsTouch(
+      'ontouchstart' in window ||
+        navigator.maxTouchPoints > 0 ||
+        // @ts-ignore
+        navigator.msMaxTouchPoints > 0
+    )
+  }, [])
 
   const addText = () => {
     const newText: CanvasElement = {
@@ -345,7 +346,7 @@ export function ImageEditor() {
   }
 
   return (
-    <DndProvider backend={isTouchDevice() ? TouchBackend : HTML5Backend}>
+    <DndProvider backend={isTouch ? TouchBackend : HTML5Backend}>
       <div className='min-h-screen bg-gray-900 text-white p-4 md:p-6'>
         <div className='max-w-7xl mx-auto'>
           <div className='flex flex-col md:flex-row gap-4 md:gap-6'>
