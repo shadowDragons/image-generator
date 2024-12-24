@@ -54,41 +54,50 @@ export const Canvas = forwardRef<HTMLDivElement, CanvasProps>(({ state, onElemen
   return (
     <div ref={containerRef} className='w-full h-[calc(100vh-180px)] flex items-center justify-center bg-gray-900 rounded-lg p-0'>
       <div
-        ref={node => {
-          drop(node)
-          if (typeof ref === 'function') ref(node)
-          else if (ref) ref.current = node
-        }}
-        className='relative overflow-hidden touch-none'
+        className='relative overflow-hidden touch-none flex items-center justify-center'
         style={{
-          width: state.canvasSize.width * scale,
-          height: state.canvasSize.height * scale,
+          width: '800px',
           maxWidth: '100%',
-          maxHeight: '100%',
-          background: state.background.value,
-          touchAction: 'none',
-          transform: `scale(${scale})`,
-          transformOrigin: 'center',
-        }}
-        onClick={e => {
-          if (e.target === e.currentTarget) {
-            onElementSelect(null)
-          }
+          height: '100%',
         }}
       >
-        {state.elements.map(element => (
-          <DraggableElement
-            key={element.id}
-            element={element}
-            onSelect={() => onElementSelect(element.id)}
-            onUpdate={updates => onElementUpdate(element.id, updates)}
-            onDuplicate={newElement => onElementDuplicate(newElement)}
-            onDelete={() => onElementDelete(element.id)}
-            scale={scale}
-            canvasWidth={state.canvasSize.width}
-            canvasHeight={state.canvasSize.height}
-          />
-        ))}
+        <div
+          ref={node => {
+            drop(node)
+            if (typeof ref === 'function') ref(node)
+            else if (ref) ref.current = node
+          }}
+          className='relative overflow-hidden touch-none'
+          style={{
+            width: state.canvasSize.width * scale,
+            height: state.canvasSize.height * scale,
+            maxWidth: '100%',
+            maxHeight: '100%',
+            background: state.background.value,
+            touchAction: 'none',
+            transform: `scale(${scale})`,
+            transformOrigin: 'center',
+          }}
+          onClick={e => {
+            if (e.target === e.currentTarget) {
+              onElementSelect(null)
+            }
+          }}
+        >
+          {state.elements.map(element => (
+            <DraggableElement
+              key={element.id}
+              element={element}
+              onSelect={() => onElementSelect(element.id)}
+              onUpdate={updates => onElementUpdate(element.id, updates)}
+              onDuplicate={newElement => onElementDuplicate(newElement)}
+              onDelete={() => onElementDelete(element.id)}
+              scale={scale}
+              canvasWidth={state.canvasSize.width}
+              canvasHeight={state.canvasSize.height}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )
