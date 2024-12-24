@@ -348,9 +348,9 @@ export function ImageEditor() {
   return (
     <DndProvider backend={isTouch ? TouchBackend : HTML5Backend}>
       <div className='min-h-screen bg-gray-900 text-white p-4 md:p-6'>
-        <div className='max-w-7xl mx-auto'>
+        <div className='mx-auto'>
           <div className='flex flex-col md:flex-row gap-4 md:gap-6'>
-            <div className='w-full md:w-64 space-y-4 md:space-y-6'>
+            <div className='w-full space-y-4 md:space-y-6'>
               <Tabs defaultValue='add' className='w-full'>
                 <TabsList className='w-full grid grid-cols-4 gap-1 p-1'>
                   <TabsTrigger value='add'>Add</TabsTrigger>
