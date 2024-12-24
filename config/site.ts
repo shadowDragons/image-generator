@@ -1,22 +1,21 @@
 import { SiteConfig } from "@/types/siteConfig";
 
-export const BASE_URL = "https://starter.weijunext.com/";
+export const BASE_URL = "https://image-generator.tool.vin";
 
 const baseSiteConfig = {
-  name: "Next.js 15 Starter",
+  name: "byte-image-generator",
   description:
-    "Next.js 15 Starter is a meticulously designed Next.js starter template aimed at providing developers with a clean, efficient, and scalable foundation for quickly launching.",
+    "a powerful tool designed to revolutionize your web development experience. With our intuitive interface, effortlessly upload images, add icons, and create custom shapes to enhance your project visuals. Join the creative revolution and elevate your web projects with our logo generator and design tools. Visit us today to transform your ideas into stunning visuals.",
   url: BASE_URL,
   metadataBase: '/',
-  keywords: ["next.js 15 starter", "next.js template", "next.js 15 base", "study next.js"],
   authors: [
     {
-      name: "weijunext",
-      url: "https://weijunext.com",
-      twitter: 'https://x.com/weijunext',
+      name: "Junexus",
+      url: "https://byte.ink",
+      twitter: 'https://x.com/Junexus_indie',
     }
   ],
-  creator: '@weijunext',
+  creator: '@Junexus_indie',
   themeColors: [
     { media: '(prefers-color-scheme: light)', color: 'white' },
     { media: '(prefers-color-scheme: dark)', color: 'black' },
