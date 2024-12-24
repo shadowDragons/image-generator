@@ -77,11 +77,26 @@ export function DraggableElement({ element, onSelect, onUpdate, onDuplicate, onD
     onDelete(element.id)
   }
 
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement
+      if (!target.closest(`[data-element-id="${element.id}"]`)) {
+        setIsSelected(false)
+      }
+    }
+
+    document.addEventListener('click', handleClickOutside)
+    return () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+  }, [element.id])
+
   const commonProps: React.HTMLAttributes<HTMLDivElement> & {
     ref: React.RefObject<HTMLDivElement>
   } = {
     ref: drag as unknown as React.RefObject<HTMLDivElement>,
     className: `absolute cursor-move ${isSelected ? 'ring-2 ring-primary' : ''}`,
+    'data-element-id': element.id,
     style: {
       left: element.x * scale,
       top: element.y * scale,
