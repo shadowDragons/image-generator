@@ -4,22 +4,22 @@ import type { CanvasSizePreset } from '../types/editor'
 
 interface CanvasSizePresetsProps {
   presets: CanvasSizePreset[]
-  currentSize: { width: number; height: number }
-  onSelect: (size: { width: number; height: number }) => void
+  currentAspectRatio: number
+  onSelect: (aspectRatio: number) => void
 }
 
-export function CanvasSizePresets({ presets, currentSize, onSelect }: CanvasSizePresetsProps) {
+export function CanvasSizePresets({ presets, currentAspectRatio, onSelect }: CanvasSizePresetsProps) {
   return (
     <div className='grid grid-cols-2 gap-2'>
       {presets.map(preset => {
         const Icon = Icons[preset.icon] as React.ComponentType<any>
-        const isSelected = currentSize.width === preset.width && currentSize.height === preset.height
+        const isSelected = Math.abs(currentAspectRatio - preset.aspectRatio) < 0.01
 
         return (
           <Card
             key={preset.id}
             className={`cursor-pointer transition-all ${isSelected ? 'ring-2 ring-primary' : 'hover:bg-accent'}`}
-            onClick={() => onSelect({ width: preset.width, height: preset.height })}
+            onClick={() => onSelect(preset.aspectRatio)}
           >
             <CardContent className='p-4'>
               <div className='flex items-center gap-2 mb-2'>
@@ -27,9 +27,7 @@ export function CanvasSizePresets({ presets, currentSize, onSelect }: CanvasSize
                 <span className='text-sm font-medium'>{preset.platform}</span>
               </div>
               <p className='text-xs text-muted-foreground'>{preset.name}</p>
-              <p className='text-xs text-muted-foreground mt-1'>
-                {preset.width} x {preset.height}
-              </p>
+              <p className='text-xs text-muted-foreground mt-1'>Aspect Ratio: {preset.aspectRatio.toFixed(2)}</p>
             </CardContent>
           </Card>
         )

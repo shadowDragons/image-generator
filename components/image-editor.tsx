@@ -27,8 +27,8 @@ export function ImageEditor() {
       value: 'linear-gradient(to bottom right, #1f1f1f, #4a1d96)',
     },
     canvasSize: {
+      aspectRatio: 4 / 3,
       width: 800,
-      height: 600,
     },
   })
   const [selectedElement, setSelectedElement] = useState<string | null>(null)
@@ -258,8 +258,8 @@ export function ImageEditor() {
         value: 'linear-gradient(135deg, #1a1a1a 0%, #4a1d96 100%)',
       },
       canvasSize: {
+        aspectRatio: 4 / 3,
         width: 800,
-        height: 600,
       },
     },
   ]
@@ -277,56 +277,53 @@ export function ImageEditor() {
       id: 'instagram-square',
       name: 'Square Post',
       platform: 'Instagram',
-      width: 1080,
-      height: 1080,
+      aspectRatio: 1,
       icon: 'Instagram',
     },
     {
       id: 'instagram-story',
       name: 'Story',
       platform: 'Instagram',
-      width: 1080,
-      height: 1920,
+      aspectRatio: 1,
       icon: 'Instagram',
     },
     {
       id: 'twitter-post',
       name: 'Post',
       platform: 'Twitter',
-      width: 1200,
-      height: 675,
+      aspectRatio: 1.777,
       icon: 'Twitter',
     },
     {
       id: 'bluesky-post',
       name: 'Post',
       platform: 'Bluesky',
-      width: 1200,
-      height: 675,
+      aspectRatio: 1.777,
       icon: 'Cloud',
     },
     {
       id: 'xiaohongshu-post',
       name: 'Post',
       platform: 'Xiaohongshu',
-      width: 1080,
-      height: 1440,
+      aspectRatio: 0.75,
       icon: 'Image',
     },
     {
       id: 'reddit-post',
       name: 'Post',
       platform: 'Reddit',
-      width: 1200,
-      height: 628,
+      aspectRatio: 1.777,
       icon: 'Share2',
     },
   ]
 
-  const updateCanvasSize = (size: { width: number; height: number }) => {
+  const updateCanvasSize = (aspectRatio: number) => {
     setEditorState(prev => ({
       ...prev,
-      canvasSize: size,
+      canvasSize: {
+        aspectRatio,
+        width: prev.canvasSize.width, // Width will be calculated by Canvas component
+      },
     }))
   }
 
@@ -428,41 +425,26 @@ export function ImageEditor() {
                 <TabsContent value='canvas' className='space-y-4'>
                   <div>
                     <Label>Canvas Size</Label>
-                    <CanvasSizePresets presets={canvasSizePresets} currentSize={editorState.canvasSize} onSelect={updateCanvasSize} />
+                    <CanvasSizePresets presets={canvasSizePresets} currentAspectRatio={editorState.canvasSize.aspectRatio} onSelect={updateCanvasSize} />
                   </div>
                   <div className='space-y-4'>
                     <div>
-                      <Label>Custom Width</Label>
+                      <Label>Custom Aspect Ratio</Label>
                       <div className='flex items-center gap-2'>
                         <Input
                           type='number'
-                          value={editorState.canvasSize.width}
-                          onChange={e =>
-                            updateCanvasSize({
-                              ...editorState.canvasSize,
-                              width: parseInt(e.target.value) || editorState.canvasSize.width,
-                            })
-                          }
+                          value={editorState.canvasSize.aspectRatio}
+                          onChange={e => {
+                            const ratio = parseFloat(e.target.value)
+                            if (ratio > 0) {
+                              updateCanvasSize(ratio)
+                            }
+                          }}
+                          step={0.1}
+                          min={0.1}
                           className='mt-2'
                         />
-                        <span className='mt-2'>px</span>
-                      </div>
-                    </div>
-                    <div>
-                      <Label>Custom Height</Label>
-                      <div className='flex items-center gap-2'>
-                        <Input
-                          type='number'
-                          value={editorState.canvasSize.height}
-                          onChange={e =>
-                            updateCanvasSize({
-                              ...editorState.canvasSize,
-                              height: parseInt(e.target.value) || editorState.canvasSize.height,
-                            })
-                          }
-                          className='mt-2'
-                        />
-                        <span className='mt-2'>px</span>
+                        <span className='mt-2'>(width/height)</span>
                       </div>
                     </div>
                   </div>

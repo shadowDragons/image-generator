@@ -8,13 +8,10 @@ export interface Template {
   name: string
   preview: string
   elements: CanvasElement[]
-  background: {
-    type: 'color' | 'gradient' | 'image'
-    value: string
-  }
+  background: EditorState['background']
   canvasSize: {
+    aspectRatio: number
     width: number
-    height: number
   }
 }
 
@@ -25,8 +22,8 @@ export interface EditorState {
     value: string
   }
   canvasSize: {
+    aspectRatio: number
     width: number
-    height: number
   }
 }
 
@@ -44,8 +41,7 @@ export interface CanvasSizePreset {
   id: string
   name: string
   platform: string
-  width: number
-  height: number
+  aspectRatio: number
   icon: keyof typeof import('lucide-react')
 }
 

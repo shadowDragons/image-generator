@@ -16,7 +16,7 @@ interface CanvasProps {
 export const Canvas = forwardRef<HTMLDivElement, CanvasProps>(({ state, onElementSelect, onElementUpdate, onElementDuplicate, onElementDelete }, ref) => {
   const [scale, setScale] = useState(1)
   const containerRef = useRef<HTMLDivElement>(null)
-
+  const [dimensions, setDimensions] = useState({ width: 0, height: 0 })
   const [, drop] = useDrop(
     () => ({
       accept: 'canvasElement',
@@ -36,29 +36,38 @@ export const Canvas = forwardRef<HTMLDivElement, CanvasProps>(({ state, onElemen
   )
 
   useEffect(() => {
-    const updateScale = () => {
+    const updateDimensions = () => {
       if (!containerRef.current) return
 
       const containerWidth = containerRef.current.offsetWidth
       const containerHeight = containerRef.current.offsetHeight
-      const scaleX = containerWidth / state.canvasSize.width
-      const scaleY = containerHeight / state.canvasSize.height
-      setScale(Math.min(scaleX, scaleY))
+
+      // Calculate width and height while maintaining aspect ratio
+      let width = containerWidth
+      let height = width / state.canvasSize.aspectRatio
+
+      // If height exceeds container, scale down
+      if (height > containerHeight) {
+        height = containerHeight
+        width = height * state.canvasSize.aspectRatio
+      }
+
+      setDimensions({ width, height })
     }
 
-    updateScale()
-    window.addEventListener('resize', updateScale)
-    return () => window.removeEventListener('resize', updateScale)
-  }, [state.canvasSize])
+    updateDimensions()
+    window.addEventListener('resize', updateDimensions)
+    return () => window.removeEventListener('resize', updateDimensions)
+  }, [state.canvasSize.aspectRatio])
 
   return (
-    <div ref={containerRef} className='w-full h-[calc(100vh-180px)] flex items-center justify-center bg-gray-900 rounded-lg p-0'>
+    <div ref={containerRef} className='bg-gray-800 p-4 md:p-8 rounded-lg overflow-auto h-[80vh] w-[800px]'>
       <div
-        className='relative overflow-hidden touch-none flex items-center justify-center'
+        className='relative overflow-hidden'
         style={{
-          width: '800px',
-          maxWidth: '100%',
-          height: '100%',
+          width: dimensions.width,
+          height: dimensions.height,
+          background: state.background.value,
         }}
       >
         <div
@@ -70,7 +79,7 @@ export const Canvas = forwardRef<HTMLDivElement, CanvasProps>(({ state, onElemen
           className='relative overflow-hidden touch-none'
           style={{
             width: state.canvasSize.width * scale,
-            height: state.canvasSize.height * scale,
+            height: (state.canvasSize.width / state.canvasSize.aspectRatio) * scale,
             maxWidth: '100%',
             maxHeight: '100%',
             background: state.background.value,
@@ -94,7 +103,7 @@ export const Canvas = forwardRef<HTMLDivElement, CanvasProps>(({ state, onElemen
               onDelete={() => onElementDelete(element.id)}
               scale={scale}
               canvasWidth={state.canvasSize.width}
-              canvasHeight={state.canvasSize.height}
+              canvasHeight={state.canvasSize.width / state.canvasSize.aspectRatio}
             />
           ))}
         </div>
