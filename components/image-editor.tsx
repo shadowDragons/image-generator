@@ -157,10 +157,55 @@ export function ImageEditor() {
 
   const exportImage = async () => {
     if (!canvasRef.current) return
-    const canvas = await html2canvas(canvasRef.current)
+
+    // Add a small delay before export
+    await new Promise(resolve => setTimeout(resolve, 500))
+
+    // Wait for all images to load completely
+    const images = canvasRef.current.getElementsByTagName('img')
+    await Promise.all(
+      Array.from(images).map(
+        img =>
+          new Promise(resolve => {
+            if (img.complete) {
+              resolve(undefined)
+            } else {
+              img.onload = () => resolve(undefined)
+              img.onerror = () => resolve(undefined)
+            }
+          })
+      )
+    )
+
+    const canvas = await html2canvas(canvasRef.current, {
+      allowTaint: true,
+      useCORS: true,
+      backgroundColor: null,
+      scale: 2,
+      logging: false,
+      imageTimeout: 0, // Remove timeout for image loading
+      onclone: document => {
+        // Ensure images are fully loaded in cloned document
+        const clonedImages = document.getElementsByTagName('img')
+        return Promise.all(
+          Array.from(clonedImages).map(
+            img =>
+              new Promise(resolve => {
+                if (img.complete) {
+                  resolve(undefined)
+                } else {
+                  img.onload = () => resolve(undefined)
+                  img.onerror = () => resolve(undefined)
+                }
+              })
+          )
+        )
+      },
+    })
+
     const link = document.createElement('a')
     link.download = 'my-design.png'
-    link.href = canvas.toDataURL()
+    link.href = canvas.toDataURL('image/png', 1.0)
     link.click()
   }
 
@@ -242,7 +287,7 @@ export function ImageEditor() {
       ...prev,
       canvasSize: {
         aspectRatio,
-        width: prev.canvasSize.width, // Width will be calculated by Canvas component
+        width: prev.canvasSize.width,
       },
     }))
   }

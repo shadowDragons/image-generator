@@ -1,0 +1,19 @@
+<svg width="100%" height="100%" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景矩形 -->
+  <rect width="100%" height="100%" fill="#f0f0f0"/>
+  
+  <!-- 图片图标 -->
+  <g transform="translate(160,100)">
+    <!-- 外框 -->
+    <rect x="0" y="0" width="80" height="80" rx="8" stroke="#666" stroke-width="4" fill="none"/>
+    <!-- 山峰 -->
+    <polyline points="0,60 20,40 40,50 60,20 80,60" stroke="#666" stroke-width="4" fill="none"/>
+    <!-- 太阳 -->
+    <circle cx="60" cy="20" r="8" fill="#666"/>
+  </g>
+  
+  <!-- 文字 -->
+  <text x="50%" y="220" font-family="Arial" font-size="14" fill="#666" text-anchor="middle">
+    Placeholder Image
+  </text>
+</svg> 

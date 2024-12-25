@@ -2,8 +2,8 @@ import { Template } from '@/types/editor'
 
 export const templates: Template[] = [
   {
-    id: 'nextjs-benefits',
-    name: 'NextJS Benefits',
+    id: 'template-1',
+    name: 'template-1',
     preview: '/placeholder.svg?height=300&width=400',
     elements: [
       {
@@ -35,6 +35,15 @@ export const templates: Template[] = [
         fontSize: 72,
         color: '#FFD700',
         fontFamily: 'Inter',
+      },
+      {
+        id: 'image',
+        type: 'image',
+        src: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgNDAwIDMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTYwLDEwMCkiPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgcng9IjgiIHN0cm9rZT0iIzY2NiIgc3Ryb2tlLXdpZHRoPSI0IiBmaWxsPSJub25lIi8+PHBvbHlsaW5lIHBvaW50cz0iMCw2MCAyMCw0MCA0MCw1MCA2MCwyMCA4MCw2MCIgc3Ryb2tlPSIjNjY2IiBzdHJva2Utd2lkdGg9IjQiIGZpbGw9Im5vbmUiLz48Y2lyY2xlIGN4PSI2MCIgY3k9IjIwIiByPSI4IiBmaWxsPSIjNjY2Ii8+PC9nPjx0ZXh0IHg9IjUwJSIgeT0iMjIwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTQiIGZpbGw9IiM2NjYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPlBsYWNlaG9sZGVyIEltYWdlPC90ZXh0Pjwvc3ZnPg==',
+        x: 50,
+        y: 370,
+        width: 200,
+        height: 200,
       },
     ],
     background: {
@@ -308,6 +317,60 @@ export const templates: Template[] = [
     },
     canvasSize: {
       aspectRatio: 1,
+      width: 800,
+    },
+  },
+  {
+    id: 'nextjs-benefits',
+    name: 'NextJS Benefits',
+    preview: '/placeholder.svg?height=300&width=400',
+    elements: [
+      {
+        id: 'title-1',
+        type: 'text',
+        content: 'Benefits',
+        x: 50,
+        y: 50,
+        fontSize: 72,
+        color: '#ffffff',
+        fontFamily: 'Inter',
+      },
+      {
+        id: 'title-2',
+        type: 'text',
+        content: 'of',
+        x: 50,
+        y: 140,
+        fontSize: 72,
+        color: '#ffffff',
+        fontFamily: 'Inter',
+      },
+      {
+        id: 'title-3',
+        type: 'text',
+        content: 'NextJS ?',
+        x: 50,
+        y: 230,
+        fontSize: 72,
+        color: '#FFD700',
+        fontFamily: 'Inter',
+      },
+      {
+        id: 'image',
+        type: 'image',
+        src: '/logo.png',
+        x: 50,
+        y: 370,
+        width: 200,
+        height: 200,
+      },
+    ],
+    background: {
+      type: 'gradient',
+      value: 'linear-gradient(135deg, #1a1a1a 0%, #4a1d96 100%)',
+    },
+    canvasSize: {
+      aspectRatio: 4 / 3,
       width: 800,
     },
   },
