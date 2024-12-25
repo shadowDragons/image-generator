@@ -93,6 +93,7 @@ export function DraggableElement({ element, onSelect, onUpdate, onDuplicate, onD
 
   const commonProps: React.HTMLAttributes<HTMLDivElement> & {
     ref: React.RefObject<HTMLDivElement>
+    'data-element-id': string
   } = {
     ref: drag as unknown as React.RefObject<HTMLDivElement>,
     className: `absolute cursor-move ${isSelected ? 'ring-2 ring-primary' : ''}`,
@@ -220,7 +221,7 @@ export function DraggableElement({ element, onSelect, onUpdate, onDuplicate, onD
           shape={element.shape}
           width={element.width}
           height={element.height}
-          fillColor={element.fillColor || '#ffffff'}
+          fillColor={element.fillColor || 'none'}
           strokeColor={element.strokeColor || '#000000'}
           strokeWidth={element.strokeWidth}
           borderRadius={element.borderRadius}

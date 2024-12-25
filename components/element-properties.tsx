@@ -100,7 +100,18 @@ export function ElementProperties({ element, onUpdate }: ElementPropertiesProps)
         </div>
         <div>
           <Label>Fill Color</Label>
-          <Input type='color' value={element.fillColor || '#ffffff'} onChange={e => onUpdate({ fillColor: e.target.value })} className='w-full mt-2' />
+          <div className='flex gap-2 mt-2'>
+            <Input
+              type='color'
+              value={element.fillColor || '#000000'}
+              onChange={e => onUpdate({ fillColor: e.target.value })}
+              disabled={!element.fillColor}
+              className='w-full'
+            />
+            <button onClick={() => onUpdate({ fillColor: undefined })} className='px-2 py-1 bg-gray-800 border border-gray-700 rounded-md hover:bg-gray-700'>
+              {element.fillColor ? 'Clear' : 'No Fill'}
+            </button>
+          </div>
         </div>
         <div>
           <Label>Stroke Color</Label>
