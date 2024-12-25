@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { templates } from '@/config/templates'
 import html2canvas from 'html2canvas'
 import * as Icons from 'lucide-react'
 import { nanoid } from 'nanoid'
@@ -181,87 +182,6 @@ export function ImageEditor() {
     { name: 'Lightning', icon: Icons.Zap },
     { name: 'Camera', icon: Icons.Camera },
     { name: 'Music', icon: Icons.Music },
-  ]
-
-  const templates: Template[] = [
-    {
-      id: 'nextjs-benefits',
-      name: 'NextJS Benefits',
-      preview: '/placeholder.svg?height=300&width=400',
-      elements: [
-        {
-          id: 'title-1',
-          type: 'text',
-          content: 'Benefits',
-          x: 50,
-          y: 50,
-          fontSize: 72,
-          color: '#ffffff',
-          fontFamily: 'Inter',
-        },
-        {
-          id: 'title-2',
-          type: 'text',
-          content: 'of',
-          x: 50,
-          y: 140,
-          fontSize: 72,
-          color: '#ffffff',
-          fontFamily: 'Inter',
-        },
-        {
-          id: 'title-3',
-          type: 'text',
-          content: 'NextJS ?',
-          x: 50,
-          y: 230,
-          fontSize: 72,
-          color: '#FFD700',
-          fontFamily: 'Inter',
-        },
-        {
-          id: 'logo',
-          type: 'shape',
-          shape: 'rectangle',
-          x: 50,
-          y: 350,
-          width: 300,
-          height: 150,
-          fillColor: '#000000',
-          strokeColor: '#ffffff',
-          strokeWidth: 2,
-          borderRadius: 16,
-        },
-        {
-          id: 'logo-text',
-          type: 'text',
-          content: 'NEXT.JS',
-          x: 100,
-          y: 400,
-          fontSize: 48,
-          color: '#000000',
-          fontFamily: 'Inter',
-        },
-        {
-          id: 'instagram',
-          type: 'text',
-          content: '@dee_techx',
-          x: 50,
-          y: 550,
-          fontSize: 24,
-          color: '#ffffff',
-          fontFamily: 'Inter',
-        },
-      ],
-      background: {
-        type: 'gradient',
-        value: 'linear-gradient(135deg, #1a1a1a 0%, #4a1d96 100%)',
-      },
-      canvasSize: {
-        aspectRatio: 4 / 3,
-        width: 800,
-      },
-    },
   ]
 
   const applyTemplate = (template: Template) => {

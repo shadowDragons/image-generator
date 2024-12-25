@@ -60,6 +60,7 @@ export interface TextElement extends BaseElement {
   fontSize: number
   color: string
   fontFamily: string
+  fontWeight?: string
   backgroundColor?: string
 }
 
