@@ -329,16 +329,22 @@ export function ImageEditor() {
                   </Button>
                   <div>
                     <Label htmlFor='image-upload'>Upload Image</Label>
-                    <Input
-                      id='image-upload'
-                      type='file'
-                      accept='image/*'
-                      onChange={e => {
-                        const file = e.target.files?.[0]
-                        if (file) addImage(file)
-                      }}
-                      className='mt-2'
-                    />
+                    <div className='relative mt-2'>
+                      <Button className='w-full flex justify-between items-center' onClick={() => document.getElementById('image-upload')?.click()}>
+                        <span>Choose File</span>
+                        <Icons.Upload className='w-4 h-4' />
+                      </Button>
+                      <Input
+                        id='image-upload'
+                        type='file'
+                        accept='image/*'
+                        onChange={e => {
+                          const file = e.target.files?.[0]
+                          if (file) addImage(file)
+                        }}
+                        className='hidden' // Hide the default input
+                      />
+                    </div>
                   </div>
                   <div>
                     <Label>Add Icon</Label>
