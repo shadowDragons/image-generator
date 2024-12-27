@@ -120,20 +120,26 @@ export function DraggableElement({ element, onSelect, onUpdate, onDuplicate, onD
     return (
       <div {...commonProps} onDoubleClick={() => setIsEditing(true)}>
         {isEditing ? (
-          <input
-            type='text'
+          <textarea
             value={element.content}
             onChange={e => onUpdate({ content: e.target.value })}
             onBlur={() => setIsEditing(false)}
             onKeyDown={e => {
-              if (e.key === 'Enter') setIsEditing(false)
+              if (e.key === 'Enter' && e.shiftKey) {
+                setIsEditing(false)
+              }
             }}
-            className='bg-transparent border rounded px-2'
+            className='bg-transparent border rounded px-2 resize-none'
             style={{
               color: element.color,
               fontSize: `${element.fontSize}px`,
               fontFamily: element.fontFamily,
               backgroundColor: element.backgroundColor,
+              fontWeight: element.fontWeight,
+              whiteSpace: 'pre-wrap',
+              wordBreak: 'break-word',
+              minWidth: '100px',
+              minHeight: '1em',
             }}
             autoFocus
           />
@@ -145,6 +151,10 @@ export function DraggableElement({ element, onSelect, onUpdate, onDuplicate, onD
               fontFamily: element.fontFamily,
               backgroundColor: element.backgroundColor,
               padding: element.backgroundColor ? '0.25em 0.5em' : undefined,
+              fontWeight: element.fontWeight,
+              whiteSpace: 'pre-wrap',
+              wordBreak: 'break-word',
+              minWidth: '100px',
             }}
           >
             {element.content}

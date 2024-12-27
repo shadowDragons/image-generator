@@ -55,6 +55,7 @@ export function ImageEditor() {
       fontSize: 24,
       color: '#ffffff',
       fontFamily: 'Inter',
+      fontWeight: 'normal',
     }
     setEditorState(prev => ({
       ...prev,

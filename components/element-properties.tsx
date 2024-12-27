@@ -48,6 +48,27 @@ export function ElementProperties({ element, onUpdate }: ElementPropertiesProps)
             <option value='Times New Roman'>Times New Roman</option>
           </select>
         </div>
+        <div>
+          <Label>Font Weight</Label>
+          <select
+            value={element.fontWeight || 'normal'}
+            onChange={e => onUpdate({ fontWeight: e.target.value })}
+            className='w-full mt-2 bg-gray-800 border border-gray-700 rounded-md p-2'
+          >
+            <option value='normal'>Normal</option>
+            <option value='bold'>Bold</option>
+            <option value='lighter'>Light</option>
+            <option value='100'>Thin (100)</option>
+            <option value='200'>Extra Light (200)</option>
+            <option value='300'>Light (300)</option>
+            <option value='400'>Regular (400)</option>
+            <option value='500'>Medium (500)</option>
+            <option value='600'>Semi Bold (600)</option>
+            <option value='700'>Bold (700)</option>
+            <option value='800'>Extra Bold (800)</option>
+            <option value='900'>Black (900)</option>
+          </select>
+        </div>
       </div>
     )
   }
