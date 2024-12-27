@@ -1,0 +1,32 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- 渐变背景 -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#4a1d96"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- 背景 -->
+  <rect width="800" height="600" fill="url(#bg-gradient)"/>
+  
+  <!-- 文本 -->
+  <text x="80" y="150" fill="white" font-family="Inter" font-size="96" font-weight="bold">
+    Benefits
+  </text>
+  <text x="80" y="280" fill="white" font-family="Inter" font-size="96" font-weight="bold">
+    of
+  </text>
+  <text x="80" y="410" fill="#FFD700" font-family="Inter" font-size="96" font-weight="bold">
+    NextJS ?
+  </text>
+  
+  <!-- 占位图像框 -->
+  <rect x="80" y="450" width="200" height="120" fill="white" rx="4"/>
+  <g transform="translate(130,470)">
+    <path d="M80 20 L120 60 L80 100 L40 60 Z" fill="none" stroke="#808080" stroke-width="2"/>
+    <text x="40" y="70" fill="#808080" font-family="Inter" font-size="12" text-anchor="middle">
+      Placeholder Image
+    </text>
+  </g>
+</svg> 

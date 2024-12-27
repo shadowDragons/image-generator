@@ -1,0 +1,65 @@
+<svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="800" height="800" fill="#4A1D96"/>
+  
+  <!-- 占位图像框 -->
+  <g transform="translate(200,100)">
+    <rect width="400" height="300" fill="#FFFFFF" rx="8"/>
+    <g transform="translate(170,120)">
+      <!-- 图片占位符图标 -->
+      <rect width="60" height="60" fill="none" stroke="#808080" stroke-width="2"/>
+      <path d="M10 40 L20 30 L30 40 L40 20 L50 40" 
+            fill="none" 
+            stroke="#808080" 
+            stroke-width="2"/>
+      <circle cx="15" cy="15" r="5" fill="#808080"/>
+    </g>
+    <text x="200" y="200" 
+          font-family="Inter" 
+          font-size="14" 
+          fill="#808080" 
+          text-anchor="middle">
+      Placeholder Image
+    </text>
+  </g>
+  
+  <!-- 1st Place 标题 -->
+  <text x="80" y="500" 
+        font-family="Inter" 
+        font-size="48" 
+        font-weight="bold" 
+        fill="white">
+    1st Place
+  </text>
+  
+  <!-- DyahAI 标题 -->
+  <text x="80" y="580" 
+        font-family="Inter" 
+        font-size="64" 
+        font-weight="bold" 
+        fill="#8B5CF6">
+    DyahAI
+  </text>
+  
+  <!-- 描述文本第一段 -->
+  <text x="80" y="640" 
+        font-family="Inter" 
+        font-size="24" 
+        fill="white" 
+        width="640">
+    <tspan x="80" dy="0">DyahAI is a Web3.0 AI-driven platform built on the Internet</tspan>
+    <tspan x="80" dy="32">Computer Protocol (ICP) that allows users to generate high-</tspan>
+    <tspan x="80" dy="32">quality images in their preferred styles.</tspan>
+  </text>
+  
+  <!-- 描述文本第二段 -->
+  <text x="80" y="760" 
+        font-family="Inter" 
+        font-size="24" 
+        fill="white" 
+        width="640">
+    <tspan x="80" dy="0">Utilizing Internet Identity for passwordless login and Smart</tspan>
+    <tspan x="80" dy="32">Contracts for security, DyahAI is developed with Motoko and</tspan>
+    <tspan x="80" dy="32">React. Users receive three free credits, then premium options.</tspan>
+  </text>
+</svg> 

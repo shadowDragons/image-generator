@@ -1,0 +1,49 @@
+<svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="800" height="800" fill="black"/>
+  
+  <!-- 顶部标题 -->
+  <text x="50" y="80" font-family="Inter" font-size="36" fill="#808080">
+    Enjoy Massive Discount Sales on
+  </text>
+  
+  <!-- 主标题 -->
+  <text x="50" y="200" font-family="Inter" font-size="72" font-weight="bold" fill="white">
+    Web3 Marketing
+  </text>
+  
+  <!-- 价格文本 -->
+  <text x="50" y="300" font-family="Inter" font-size="48" fill="white">
+    Learn, Engage and Earn for
+  </text>
+  
+  <!-- 价格标签背景 -->
+  <rect x="520" y="260" width="120" height="60" rx="8" fill="#8B5CF6"/>
+  
+  <!-- 价格 -->
+  <text x="540" y="300" font-family="Inter" font-size="48" font-weight="bold" fill="white">
+    $10
+  </text>
+  
+  <!-- 内容标题 -->
+  <text x="50" y="400" font-family="Inter" font-size="48" font-weight="bold" fill="white">
+    What's in it for you?
+  </text>
+  
+  <!-- 内容列表 -->
+  <g font-family="Inter" font-size="32" fill="white">
+    <text x="50" y="480">• Course Material (Lifetime Access)</text>
+    <text x="50" y="540">• Access to Mentorship</text>
+    <text x="50" y="600">• Access to Job Placement and Interview Prep</text>
+    <text x="50" y="660">• Pre Recorded Sessions and Capstone Project</text>
+    <text x="50" y="720">• Community Incentives.</text>
+  </g>
+  
+  <!-- 底部按钮 -->
+  <g transform="translate(200,750)">
+    <rect width="400" height="60" rx="30" fill="#8B5CF6"/>
+    <text x="200" y="40" font-family="Inter" font-size="32" fill="white" text-anchor="middle">
+      Apply now at byte.ink
+    </text>
+  </g>
+</svg> 

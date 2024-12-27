@@ -4,7 +4,7 @@ export const templates: Template[] = [
   {
     id: 'template-1',
     name: 'template-1',
-    preview: '/placeholder.svg?height=300&width=400',
+    preview: '/template/template-1.svg?height=300&width=400',
     elements: [
       {
         id: 'title-1',
@@ -58,7 +58,7 @@ export const templates: Template[] = [
   {
     id: 'template-2',
     name: 'template-2',
-    preview: '/placeholder.svg?height=300&width=400',
+    preview: '/template/template-2.svg?height=300&width=400',
     elements: [
       {
         id: 'bulb-icon',
@@ -138,7 +138,7 @@ export const templates: Template[] = [
   {
     id: 'template-3',
     name: 'template-3',
-    preview: '/placeholder.svg?height=300&width=400',
+    preview: '/template/template-3.svg?height=300&width=400',
     elements: [
       {
         id: 'subtitle',
@@ -234,8 +234,8 @@ export const templates: Template[] = [
       {
         id: 'cta-text',
         type: 'text',
-        content: 'Apply now at helicode.xyz',
-        x: 170,
+        content: 'Apply now at byte.ink',
+        x: 190,
         y: 500,
         fontSize: 20,
         color: '#ffffff',
@@ -254,7 +254,7 @@ export const templates: Template[] = [
   {
     id: 'template-4',
     name: 'template-4',
-    preview: '/placeholder.svg?height=300&width=400',
+    preview: '/template/template-4.svg?height=300&width=400',
     elements: [
       {
         id: 'image',

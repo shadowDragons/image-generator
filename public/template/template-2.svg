@@ -1,0 +1,52 @@
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect width="800" height="600" fill="white"/>
+  
+  <!-- 灯泡图标 -->
+  <g transform="translate(80,50)">
+    <path d="M60 0
+             A 60 60 0 1 1 60 120
+             A 60 30 0 0 1 60 180
+             M 45 180 L 45 200
+             M 75 180 L 75 200"
+          fill="none"
+          stroke="#E18AAA"
+          stroke-width="12"
+          stroke-linecap="round"/>
+  </g>
+  
+  <!-- 问题文本 -->
+  <text x="80" y="300" font-family="Inter" font-size="64" font-weight="bold" fill="#E18AAA">
+    WOULD YOU
+  </text>
+  <text x="80" y="380" font-family="Inter" font-size="64" font-weight="bold" fill="#E18AAA">
+    CONSIDER ADOPTING
+  </text>
+  <text x="80" y="460" font-family="Inter" font-size="64" font-weight="bold" fill="#E18AAA">
+    WEB3 FOR YOUR
+  </text>
+  <text x="80" y="540" font-family="Inter" font-size="64" font-weight="bold" fill="#E18AAA">
+    NEXTPROJECT?
+  </text>
+  
+  <!-- 答案部分 -->
+  <text x="80" y="620" font-family="Inter" font-size="36" font-weight="bold" fill="#333333">
+    Ans:
+  </text>
+  <text x="80" y="670" font-family="Inter" font-size="36" fill="#333333">
+    Yes/No/Not Sure
+  </text>
+  
+  <!-- 底部品牌信息 -->
+  <text x="80" y="750" font-family="Inter" font-size="32" font-weight="bold" fill="#333333">
+    CHAIN DUSTRY
+  </text>
+  
+  <!-- Twitter/X handle -->
+  <g transform="translate(600,730)">
+    <rect width="200" height="40" rx="20" fill="#333333"/>
+    <text x="100" y="27" font-family="Inter" font-size="18" fill="white" text-anchor="middle">
+      @chaindustry
+    </text>
+  </g>
+</svg> 
