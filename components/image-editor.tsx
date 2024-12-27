@@ -309,7 +309,7 @@ export function ImageEditor() {
 
   return (
     <DndProvider backend={isTouch ? TouchBackend : HTML5Backend}>
-      <div className='min-h-screen bg-gray-900 text-white p-4 md:p-6'>
+      <div className='min-h-screen bg-gray-900 text-white p-4 pl-[30rem] md:p-6'>
         <div className='mx-auto'>
           <div className='flex flex-col md:flex-row gap-4 md:gap-6'>
             <div className='w-full space-y-4 md:space-y-6'>
