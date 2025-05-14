@@ -1,17 +1,16 @@
 import Link from 'next/link'
 import React from 'react'
-import { BsTwitterX } from 'react-icons/bs'
-
+import { BsGithub, BsTwitterX } from 'react-icons/bs'
 const headerLinks = [
-  // {
-  //   name: 'repo',
-  //   href: 'https://github.com/weijunext/nextjs-15-starter',
-  //   icon: BsGithub,
-  // },
+  {
+    name: 'repo',
+    href: 'https://github.com/shadowDragons/image-generator',
+    icon: BsGithub,
+  },
   { name: 'twitter', href: 'https://x.com/Junexus_indie', icon: BsTwitterX },
   // {
   //   name: 'buyMeCoffee',
-  //   href: 'https://www.buymeacoffee.com/weijunext',
+  //   href: 'https://www.sphrag.com/en/sponsor',
   //   icon: SiBuymeacoffee,
   // },
 ]

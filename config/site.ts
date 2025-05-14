@@ -12,7 +12,7 @@ const baseSiteConfig = {
   authors: [
     {
       name: 'Junexus',
-      url: 'https://byte.ink',
+      url: 'https://sphrag.com',
       twitter: 'https://x.com/Junexus_indie',
     },
   ],
